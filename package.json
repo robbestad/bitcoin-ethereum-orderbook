@@ -9,14 +9,26 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "lodash.orderby": "^4.6.0",
+    "lodash.sortby": "^4.7.0",
     "next": "11.0.1",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-use-websocket": "^2.7.1"
   },
   "devDependencies": {
+    "@types/chai": "^4.2.20",
+    "@types/lodash.orderby": "^4.6.6",
+    "@types/lodash.sortby": "^4.7.6",
+    "@types/mocha": "^8.2.3",
     "@types/react": "17.0.13",
+    "chai": "^4.3.4",
     "eslint": "7.30.0",
     "eslint-config-next": "11.0.1",
+    "jest": "^27.0.6",
+    "mocha": "^9.0.2",
+    "ts-jest": "^27.0.3",
+    "ts-node": "^10.0.0",
     "typescript": "4.3.5"
   }
 }
