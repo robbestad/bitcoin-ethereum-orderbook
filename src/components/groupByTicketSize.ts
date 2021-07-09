@@ -44,8 +44,4 @@ export default function groupByTicketsize(bids: RawBid[], ticketSize: TicketSize
     });
 
     return newBids;
-
-    // Round the price for the orders depending on the grouping amount
-
-
 }
