@@ -6,39 +6,39 @@
   width: 100%;
   max-width: calc(6 * 7em + 15em);
 }
-.bidContainer{
+.bidContainer {
   padding: 0 0.5rem;
   background: black;
-  color:white;
+  color: white;
   display: flex;
   position: relative;
-  transition: opacity .25s ease-in;
+  transition: opacity 0.25s ease-in;
 }
 
-.bids{
+.bids {
   grid-area: Bids;
   font-family: Consolas, Courier New, monospace;
   font-size: 1em;
 }
-.asks{
+.asks {
   grid-area: Asks;
   font-family: Consolas, Courier New, monospace;
   font-size: 1em;
 }
-.controls{
+.controls {
   grid-area: Controls;
-  color:white;
-  display:flex;
+  color: white;
+  display: flex;
   justify-content: center;
 }
 
-.btnToggleFeed{
-  margin: 0 .5em;
+.btnToggleFeed {
+  margin: 0 0.5em;
   background-color: #6049d7;
   color: var(--color-light);
   border-radius: 0.25em;
   border: 1px solid #6049d7;
-  padding: .5em;
+  padding: 0.5em;
   width: 8em;
 }
 .btnToggleFeed:hover {
@@ -49,13 +49,13 @@
   background-color: #6049f7;
   border: 1px solid #6049f7;
 }
-.btnKillFeed{
-  margin: 0 .5em;
+.btnKillFeed {
+  margin: 0 0.5em;
   background-color: #a01a1c;
   color: var(--color-light);
   border-radius: 0.25em;
   border: 1px solid #a01a1c;
-  padding: .5em;
+  padding: 0.5em;
   width: 8em;
 }
 .btnKillFeed:hover {
@@ -67,24 +67,27 @@
   border: 1px solid #e01a1c;
 }
 
-.reverse{
+.reverse {
   flex-direction: row-reverse;
 }
 
-.total, .price, .size{
+.total,
+.price,
+.size {
   text-align: right;
   min-width: 7em;
   margin: 0 1em;
 }
 
-.price__green{
-  color: var(--color-green)
+.price__green {
+  color: var(--color-green);
 }
-.price__red{
+.price__red {
   color: var(--color-red-dark);
 }
 
-.chart,.chartReversed{
+.chart,
+.chartReversed {
   background: rgba(153, 46, 46, 0.39);
   top: 0;
   bottom: 0;
@@ -92,19 +95,19 @@
   z-index: 1;
   height: 100%;
 }
-.chart{
+.chart {
   right: 0;
   background: rgba(0, 146, 46, 0.39);
 }
-.chartReversed{
-  left:0;
+.chartReversed {
+  left: 0;
 }
-.spread{
+.spread {
   grid-area: Spread;
   padding: 0;
-  margin: 0 0 0 .5em;
-  color:var(--color-gray);
-  font-size:.8em;
+  margin: 0 0 0 0.5em;
+  color: var(--color-gray);
+  font-size: 0.8em;
   text-align: center;
   display: none;
 }
@@ -114,35 +117,26 @@
     width: 22em;
     margin: 1em auto;
   }
-  .bidContainer{
+  .bidContainer {
     flex-direction: row-reverse;
   }
-  .spread{
+  .spread {
     display: block;
   }
-  .total, .price, .size{
+  .total,
+  .price,
+  .size {
     text-align: right;
     min-width: 6em;
-    margin: 0 .5em;
+    margin: 0 0.5em;
   }
-  .chart,.chartReversed{
-    left:0;
+  .chart,
+  .chartReversed {
+    left: 0;
   }
-
 }
 @media (min-width: 54em) {
   .container {
-    margin: .25em auto;
+    margin: 0.25em auto;
   }
-}
-
-.infoRow{
-  display: flex;
-  flex-flow: row;
-  color: var(--color-light);
-  padding: 0 0.5rem;
-  background: black;
-  color:white;
-  transition: opacity .25s ease-in;
-  justify-content: space-between;
 }
