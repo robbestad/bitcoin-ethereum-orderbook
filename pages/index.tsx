@@ -3,15 +3,20 @@ import orderBy from "lodash.orderby";
 import styles from "../styles/Orderbook.module.css";
 import { Feed, Variant } from "../src/typings/enums";
 import useOrderBook from "../src/hooks/orderbook";
-import Bids from "../src/views/bids";
+import Orders from "../src/views/orders";
 import Header from "../src/views/header";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import toggleFeed from "../src/components/toggleFeed";
 import calculateSpread from "../src/components/calculateSpread";
 import changeGrouping from "../src/components/changeGrouping";
 
+function ErrorHandler() {
+  return <div>Error!</div>;
+}
+
 export default function Orderbook() {
   const [feed, setFeed] = useState(Feed.Bitcoin_USD);
+  const [displayError, setDisplayError] = useState(false);
   const {
     asks,
     bids,
@@ -37,22 +42,24 @@ export default function Orderbook() {
     clearOrderBook
   );
 
-  const [killed, setIsKilled] = useState(false);
-
-  function handleKillFeed(feed: Feed) {
-    if (killed) sendMessageEvent([feed], "subscribe");
-    else sendMessageEvent([feed], "unsubscribe");
-    setIsKilled(!killed);
+  function killFeed() {
+    if (!displayError) {
+      sendMessageEvent([feed], "unsubscribe");
+      setDisplayError(true);
+    } else {
+      sendMessageEvent([feed], "subscribe");
+      setDisplayError(false);
+    }
   }
 
   const spread = useMemo(() => {
     return calculateSpread(bids, asks);
   }, [bids, asks]);
+
   let asksReversed = orderBy(asks, "price", "desc").slice(
     asks.length - 10,
     asks.length
   );
-
   return (
     <div className={styles.container}>
       <Header
@@ -61,10 +68,10 @@ export default function Orderbook() {
         handleChangeGrouping={curriedHandleGroupingChange}
         spread={spread}
       />
-      <Bids entries={bids} reverse={false} depth={10} />
+      <Orders entries={bids} reverse={false} depth={10} />
       <div className={styles.spread}>Spread {spread}</div>
-      <Bids entries={asks} reverse={true} depth={10} />
-      <Bids
+      <Orders entries={asks} reverse={true} depth={10} />
+      <Orders
         entries={asksReversed}
         reverse={true}
         depth={10}
@@ -77,13 +84,15 @@ export default function Orderbook() {
         >
           Toggle feed
         </button>
-        <button
-          className={styles.btnKillFeed}
-          onClick={() => handleKillFeed(feed)}
-        >
-          Kill feed
+        <button className={styles.btnKillFeed} onClick={() => killFeed()}>
+          {displayError ? "Restart" : "Kill feed"}
         </button>
       </div>
+      {displayError && (
+        <div className={styles.errorView}>
+          An unexpected error has occurred!
+        </div>
+      )}
     </div>
   );
 }
