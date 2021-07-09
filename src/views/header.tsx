@@ -15,7 +15,10 @@ function Header({feed, currentGrouping, handleChangeGrouping, spread}: Props) {
             <h1 className={styles.title}>Order Book</h1>
             <div className={styles.spread}>Spread {spread}</div>
             <div className={styles.grouping}>
-               <Select currentGrouping={currentGrouping} feed={feed} callback={(value)=>handleChangeGrouping(value)} />
+               <Select 
+               currentGrouping={currentGrouping} 
+               feed={feed} 
+               callback={(value)=>handleChangeGrouping(value)} />
             </div>
         </section>
     );

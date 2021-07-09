@@ -13,7 +13,6 @@
   display: flex;
   position: relative;
   transition: opacity .25s ease-in;
-
 }
 
 .bids{
@@ -113,6 +112,7 @@
   .container {
     grid-template-areas: "Head Head Head Head" "Asks Asks Asks Asks" "Spread Spread Spread Spread" "Bids Bids Bids Bids" "Controls Controls Controls Controls";
     width: 22em;
+    margin: 1em auto;
   }
   .bidContainer{
     flex-direction: row-reverse;
@@ -134,4 +134,15 @@
   .container {
     margin: .25em auto;
   }
+}
+
+.infoRow{
+  display: flex;
+  flex-flow: row;
+  color: var(--color-light);
+  padding: 0 0.5rem;
+  background: black;
+  color:white;
+  transition: opacity .25s ease-in;
+  justify-content: space-between;
 }
