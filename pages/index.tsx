@@ -1,4 +1,5 @@
 import curry from "lodash.curry";
+import orderBy from "lodash.orderby";
 import styles from "../styles/Orderbook.module.css";
 import { Feed } from "../src/typings/enums";
 import useOrderBook from "../src/hooks/orderbook";
@@ -56,7 +57,7 @@ export default function Orderbook() {
         handleChangeGrouping={curriedHandleGroupingChange}
         spread={spread}
       />
-      <Bids entries={asks} reverse={false} depth={10} />
+      <Bids entries={bids} reverse={false} depth={10} />
       <div className={styles.spread}>Spread {spread}</div>
       <Bids entries={asks} reverse={true} depth={10} />
       <div className={styles.controls}>
