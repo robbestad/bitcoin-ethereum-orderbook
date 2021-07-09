@@ -24,6 +24,22 @@
   grid-area: Asks;
   font-family: Consolas, Courier New, monospace;
   font-size: 1em;
+  display: none;
+}
+.asksMobile{
+  display: none;
+}
+.asksDesktop{
+  display: block;
+}
+@media (max-width: 900px) {
+  .asksMobile{
+    display: block;
+  }
+  .asksDesktop{
+    display: none;
+  }
+
 }
 .controls {
   grid-area: Controls;
@@ -70,6 +86,7 @@
 .reverse {
   flex-direction: row-reverse;
 }
+
 
 .total,
 .price,

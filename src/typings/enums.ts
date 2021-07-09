@@ -12,3 +12,8 @@ export enum TicketSize {
     EthLarge = 0.25
 }
 
+export enum Variant{
+    desktop,
+    mobile
+}
+

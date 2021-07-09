@@ -2,6 +2,7 @@ import {Dispatch} from "react";
 import {IPayload, IState} from "../typings/interfaces";
 import {TicketSize} from "../typings/enums";
 import {updateOrderbook} from "./updateOrderbook";
+import orderBy from "lodash.orderby";
 
 export function reducer(state: IState, action: { type: string; payload?: IPayload | TicketSize; }): IState {
     switch (action.type) {
