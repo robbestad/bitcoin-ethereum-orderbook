@@ -1,4 +1,4 @@
-import styles from "../../styles/Header.module.css";
+import styles from "../../styles/Titlebar.module.css";
 import { Feed, TicketSize } from "../typings/enums";
 import Select from "./selectGrouping";
 
@@ -16,7 +16,7 @@ function Titlebar({
   spread,
 }: Props) {
   return (
-    <section className={styles.headerContainer}>
+    <section className={styles.titlebarContainer}>
       <h1 className={styles.title}>Order Book</h1>
       <div className={styles.spread}>Spread {spread}</div>
       <div className={styles.grouping}>

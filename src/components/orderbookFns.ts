@@ -18,11 +18,17 @@ export function reducer(
         state.currentGrouping
       );
       let asksReversed = orderBy(newAsks, "price", "desc");
+      let newBids = updateOrderbook(
+        state.bids,
+        bids,
+        false,
+        state.currentGrouping
+      );
       return {
         ...state,
-        asksReversed,
-        asks: newAsks,
-        bids: updateOrderbook(state.bids, bids, false, state.currentGrouping),
+        asksReversed: asksReversed.slice(0, 15),
+        asks: newAsks.slice(0, 15),
+        bids: newBids.slice(0, 15),
       };
     }
     case "setGrouping": {
