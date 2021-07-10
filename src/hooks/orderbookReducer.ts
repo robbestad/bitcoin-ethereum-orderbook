@@ -25,9 +25,9 @@ export function reducer(
       );
       return {
         ...state,
-        asksReversed: asksReversed.slice(0, 15),
-        asks: newAsks.slice(0, 15),
-        bids: newBids.slice(0, 15),
+        asksReversed: asksReversed,
+        asks: newAsks,
+        bids: newBids,
       };
     }
     case "setTicketSizeGrouping": {
