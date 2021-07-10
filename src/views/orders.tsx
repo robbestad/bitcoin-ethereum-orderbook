@@ -12,6 +12,7 @@ type Props = {
 };
 
 function Bids({ entries, reverse, depth, variant = Variant.desktop }: Props) {
+  if (!entries) return null;
   let highestTotal = entries[depth - 1]?.total;
   if (variant === Variant.mobile) {
     highestTotal = entries[0]?.total;

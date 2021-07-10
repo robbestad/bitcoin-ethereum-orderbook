@@ -1,12 +1,13 @@
-:root{
+:root {
   --color-light: #ddd;
+  --color-background: rgb(10, 10, 10);
   --color-dark: rgb(18, 25, 40);
-  --color-gray: rgba(91,98,111,1);
-  --color-divider: rgba(40,40,40,1);
+  --color-gray: rgba(91, 98, 111, 1);
+  --color-divider: rgba(40, 40, 40, 1);
   --color-green: rgb(17, 159, 59);
-  --color-red: rgba(240,10,20,1);
+  --color-red: rgba(240, 10, 20, 1);
   --color-red-dark: rgb(198, 34, 46);
-  --select-bgcolor: rgba(48,57,71,1);
+  --select-bgcolor: rgba(48, 57, 71, 1);
   --select-border: #777;
   --select-focus: blue;
   --select-arrow: #999;
@@ -18,6 +19,12 @@ body {
   background-color: var(--color-dark);
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+@media (max-width: 900px) {
+  html,
+  body {
+    background-color: var(--color-background);
+  }
 }
 
 a {

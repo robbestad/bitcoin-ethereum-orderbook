@@ -2,6 +2,7 @@ import { Dispatch } from "react";
 import { IPayload, IState } from "../typings/interfaces";
 import { TicketSize } from "../typings/enums";
 import { updateOrderbook } from "./updateOrderbook";
+import orderBy from "lodash.orderby";
 
 export function reducer(
   state: IState,
@@ -10,9 +11,20 @@ export function reducer(
   switch (action.type) {
     case "newData": {
       const { asks, bids } = action.payload as IPayload;
+      const newAsks = updateOrderbook(
+        state.asks,
+        asks,
+        true,
+        state.currentGrouping
+      );
+      let asksReversed = orderBy(newAsks, "price", "desc").slice(
+        newAsks.length - 10,
+        newAsks.length
+      );
       return {
         ...state,
-        asks: updateOrderbook(state.asks, asks, true, state.currentGrouping),
+        asksReversed,
+        asks: newAsks,
         bids: updateOrderbook(state.bids, bids, false, state.currentGrouping),
       };
     }
