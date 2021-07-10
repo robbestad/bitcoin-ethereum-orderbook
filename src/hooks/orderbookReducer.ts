@@ -16,7 +16,10 @@ export function reducer(
         true,
         state.currentGrouping
       );
-      let asksReversed = orderBy(newAsks, "price", "desc");
+      let asksReversed = orderBy(newAsks, "price", "desc").slice(
+        newAsks.length - 10,
+        newAsks.length
+      );
       let newBids = updateOrderbook(
         state.bids,
         bids,
