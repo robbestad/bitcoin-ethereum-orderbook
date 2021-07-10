@@ -4,7 +4,7 @@ import errorstyles from "../styles/Error.module.css";
 import { Feed, Variant } from "../src/typings/enums";
 import useOrderBook from "../src/hooks/orderbook";
 import Orders from "../src/views/orders";
-import Header from "../src/views/header";
+import Titlebar from "../src/views/titlebar";
 import { useEffect, useMemo, useRef, useState } from "react";
 import toggleFeed from "../src/components/toggleFeed";
 import calculateSpread from "../src/components/calculateSpread";
@@ -27,7 +27,6 @@ export default function Orderbook() {
   } = useOrderBook("wss://www.cryptofacilities.com/ws/v1", [feed]);
 
   useEffect(() => {
-    // important to clear orderbook when changing feeds
     clearOrderBook("reset");
     sendMessageEvent([feed], "subscribe");
   }, [feed]);
@@ -47,6 +46,7 @@ export default function Orderbook() {
     if (!displayError) {
       crashFeed();
     } else {
+      clearOrderBook("reset");
       restartFeed();
     }
   }
@@ -57,25 +57,33 @@ export default function Orderbook() {
 
   return (
     <div className={styles.container}>
-      <Header
+      <Titlebar
         feed={feed}
         currentGrouping={currentGrouping}
         handleChangeGrouping={curriedHandleGroupingChange}
         spread={spread}
       />
-      <Orders entries={bids} reverse={false} depth={10} />
+
+      <Orders entries={bids} greenColorScheme={false} depth={10} />
+
+      {/* only visible on mobile */}
       <div className={styles.spread}>Spread {spread}</div>
-      <Orders entries={asks} reverse={true} depth={10} />
+
+      {/* only visible on desktop */}
+      <Orders entries={asks} greenColorScheme={true} depth={10} />
+
+      {/* only visible on mobile */}
       <Orders
         entries={asksReversed}
-        reverse={true}
+        greenColorScheme={true}
         depth={10}
         variant={Variant.mobile}
       />
+
       <Controls
         feed={feed}
         handleToggleCrash={handleToggleCrash}
-        curriedToggleFeed={curriedToggleFeed}
+        handleToggleFeed={curriedToggleFeed}
         displayError={displayError}
       />
       {displayError && (

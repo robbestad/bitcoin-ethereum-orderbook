@@ -1,14 +1,15 @@
 import styles from "../../styles/Orderbook.module.css";
+import { Feed } from "../typings/enums";
 
 type Props = {
-  feed: string;
-  curriedToggleFeed: (feed: string) => void;
+  feed: Feed;
+  handleToggleFeed: (feed: Feed) => void;
   displayError: boolean;
   handleToggleCrash: () => void;
 };
 export default function Controls({
   feed,
-  curriedToggleFeed,
+  handleToggleFeed,
   displayError,
   handleToggleCrash,
 }: Props) {
@@ -16,7 +17,7 @@ export default function Controls({
     <div className={styles.controls}>
       <button
         className={styles.btnToggleFeed}
-        onClick={() => curriedToggleFeed(feed)}
+        onClick={() => handleToggleFeed(feed)}
       >
         Toggle feed
       </button>

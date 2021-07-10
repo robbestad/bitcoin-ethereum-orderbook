@@ -1,1 +1,1 @@
-export type RawBid = [number, number];
+export type RawOrder = [number, number];

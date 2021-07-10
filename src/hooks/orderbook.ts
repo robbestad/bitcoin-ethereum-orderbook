@@ -46,13 +46,13 @@ const useOrderBook = (url: string, product_ids: string[]) => {
 
   useEffect(() => {
     if (readyState === ReadyState.OPEN) {
-      setDisplayError(false);
-      setHasConnectedOnce(true);
-      sendMessageEvent(product_ids, "subscribe");
+      if (displayError) setDisplayError(false);
+      if (!hasConnectedOnce) setHasConnectedOnce(true);
       return;
     } else {
       if (hasConnectedOnce) setDisplayError(true);
     }
+    sendMessageEvent(product_ids, "subscribe");
   }, [connectionStatus, hasConnectedOnce, readyState, sendMessageEvent]);
 
   useEffect(() => {

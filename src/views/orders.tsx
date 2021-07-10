@@ -1,17 +1,22 @@
 import cn from "classnames";
 import styles from "../../styles/Orderbook.module.css";
-import { BidWithTotal } from "../typings/interfaces";
+import { OrderWithTotal } from "../typings/interfaces";
 import Entry from "./orderEntry";
 import { Variant } from "../typings/enums";
 
 type Props = {
-  entries: BidWithTotal[];
-  reverse: boolean;
+  entries: OrderWithTotal[];
+  greenColorScheme: boolean;
   depth: number;
   variant?: Variant;
 };
 
-function Bids({ entries, reverse, depth, variant = Variant.desktop }: Props) {
+function Bids({
+  entries,
+  greenColorScheme,
+  depth,
+  variant = Variant.desktop,
+}: Props) {
   if (!entries) return null;
   let highestTotal = entries[depth - 1]?.total;
   if (variant === Variant.mobile) {
@@ -20,10 +25,10 @@ function Bids({ entries, reverse, depth, variant = Variant.desktop }: Props) {
   return (
     <div
       className={cn({
-        [styles.asks]: reverse,
-        [styles.bids]: !reverse,
-        [styles.asksMobile]: reverse && variant === Variant.mobile,
-        [styles.asksDesktop]: reverse && variant === Variant.desktop,
+        [styles.asks]: greenColorScheme,
+        [styles.bids]: !greenColorScheme,
+        [styles.asksMobile]: greenColorScheme && variant === Variant.mobile,
+        [styles.asksDesktop]: greenColorScheme && variant === Variant.desktop,
       })}
     >
       <div className={styles.bidContainer}>
@@ -37,7 +42,7 @@ function Bids({ entries, reverse, depth, variant = Variant.desktop }: Props) {
             <Entry
               key={`${index}${bid.price}`}
               highestTotal={highestTotal}
-              reverse={reverse}
+              reverse={greenColorScheme}
               bid={bid}
               variant={variant}
             />

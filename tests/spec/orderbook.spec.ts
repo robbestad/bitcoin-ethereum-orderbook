@@ -1,11 +1,11 @@
 import { expect } from "chai";
 import { updateOrderbook } from "../../src/components/updateOrderbook";
 import { TicketSize } from "../../src/typings/enums";
-import { RawBid } from "../../src/typings/types";
+import { RawOrder } from "../../src/typings/types";
 
 describe("Update orderbook", () => {
-  let bids: RawBid[];
-  let asks: RawBid[];
+  let bids: RawOrder[];
+  let asks: RawOrder[];
 
   beforeEach(() => {
     bids = [

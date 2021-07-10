@@ -1,11 +1,11 @@
 import { TicketSize } from "../../src/typings/enums";
 import { expect } from "chai";
 import groupByTicketsize from "../../src/components/groupByTicketSize";
-import { RawBid } from "../../src/typings/types";
+import { RawOrder } from "../../src/typings/types";
 
 describe("Group stream by ticketsize", () => {
   it("Groups bitcoin by 2.5", () => {
-    const orderbook: RawBid[] = [
+    const orderbook: RawOrder[] = [
       [34669.5, 1000],
       [34670.0, 1500],
       [34671, 3000.0],
@@ -46,7 +46,7 @@ describe("Group stream by ticketsize", () => {
   });
 
   it("Groups bitcoin by ticketsize 1", () => {
-    const orderbook: RawBid[] = [
+    const orderbook: RawOrder[] = [
       [34669.5, 1000],
       [34670.0, 1500],
       [34671, 3000.0],

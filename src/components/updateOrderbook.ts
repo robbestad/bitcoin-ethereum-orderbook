@@ -1,12 +1,12 @@
 import orderBy from "lodash.orderby";
-import { BidWithTotal } from "../typings/interfaces";
+import { OrderWithTotal } from "../typings/interfaces";
 import { TicketSize } from "../typings/enums";
 import groupByTicketsize from "./groupByTicketSize";
-import { RawBid } from "../typings/types";
+import { RawOrder } from "../typings/types";
 
 export const updateOrderbook = (
-  orderbook: BidWithTotal[],
-  delta: RawBid[] = [],
+  orderbook: OrderWithTotal[],
+  delta: RawOrder[] = [],
   reverseOrder = false,
   ticketSize: TicketSize = TicketSize.BTCDefault
 ) => {

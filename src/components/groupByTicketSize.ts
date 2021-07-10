@@ -1,15 +1,15 @@
-import { RawBid } from "../typings/types";
+import { RawOrder } from "../typings/types";
 import { TicketSize } from "../typings/enums";
 
 export default function groupByTicketsize(
-  bids: RawBid[],
+  bids: RawOrder[],
   ticketSize: TicketSize
 ) {
   let currentBid = bids[0];
-  let newBids: RawBid[] = [];
-  let bidGroup: RawBid[][] = [];
+  let newBids: RawOrder[] = [];
+  let bidGroup: RawOrder[][] = [];
   let bidGroupCount = 0;
-  let tempBids: RawBid[] = [];
+  let tempBids: RawOrder[] = [];
   bids.forEach((bid, index) => {
     const [currentPrice, currentSize] = currentBid;
     const [nextPrice, nextSize] = bid;

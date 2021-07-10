@@ -1,10 +1,10 @@
-import { BidWithTotal } from "../typings/interfaces";
+import { OrderWithTotal } from "../typings/interfaces";
 import cn from "classnames";
 import styles from "../../styles/Orderbook.module.css";
 import { Variant } from "../typings/enums";
 
 type EntryProps = {
-  bid: BidWithTotal;
+  bid: OrderWithTotal;
   highestTotal: number;
   reverse: boolean;
   variant: Variant;

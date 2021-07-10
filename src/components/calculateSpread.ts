@@ -1,9 +1,9 @@
-import { BidWithTotal } from "../typings/interfaces";
+import { OrderWithTotal } from "../typings/interfaces";
 import sortBy from "lodash.sortby";
 
 export default function calculateSpread(
-  bids: BidWithTotal[],
-  asks: BidWithTotal[]
+  bids: OrderWithTotal[],
+  asks: OrderWithTotal[]
 ): string {
   let sortedBid = sortBy(bids, "price").reverse();
   let sortedAsk = sortBy(asks, "price");

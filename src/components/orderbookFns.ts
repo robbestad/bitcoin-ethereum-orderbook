@@ -17,10 +17,7 @@ export function reducer(
         true,
         state.currentGrouping
       );
-      let asksReversed = orderBy(newAsks, "price", "desc").slice(
-        newAsks.length - 10,
-        newAsks.length
-      );
+      let asksReversed = orderBy(newAsks, "price", "desc");
       return {
         ...state,
         asksReversed,
@@ -36,9 +33,10 @@ export function reducer(
     }
     case "reset": {
       return {
-        ...state,
+        currentGrouping: state.currentGrouping,
         asks: [],
         bids: [],
+        asksReversed: [],
       };
     }
     default:
