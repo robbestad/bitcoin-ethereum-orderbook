@@ -5,7 +5,7 @@ import { Feed, Variant } from "../src/typings/enums";
 import useOrderBook from "../src/hooks/orderbook";
 import Orders from "../src/views/orders";
 import Titlebar from "../src/views/titlebar";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import toggleFeed from "../src/components/toggleFeed";
 import calculateSpread from "../src/components/calculateSpread";
 import changeTicketSizeGrouping from "../src/components/changeTicketSizeGrouping";
@@ -26,17 +26,13 @@ export default function Orderbook() {
     displayError,
   } = useOrderBook("wss://www.cryptofacilities.com/ws/v1", [feed]);
 
-  useEffect(() => {
-    clearOrderBook("reset");
-    sendMessageEvent([feed], "subscribe");
-  }, [feed]);
-
   const curriedToggleFeed = curry(toggleFeed)(
     sendMessageEvent,
     setFeed,
     setGroupingEvent,
     clearOrderBook
   );
+
   const curriedHandleGroupingChange = curry(changeTicketSizeGrouping)(
     setGroupingEvent,
     clearOrderBook

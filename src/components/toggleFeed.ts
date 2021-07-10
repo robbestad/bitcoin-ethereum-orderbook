@@ -18,7 +18,9 @@ export default function toggleFeed(
     newFeed = Feed.Bitcoin_USD;
   }
   const timer = setTimeout(() => {
+    clearOrderBook("reset");
     setFeed(newFeed);
-  }, 300);
+    sendMessageEvent([newFeed], "subscribe");
+  }, 250);
   return () => clearTimeout(timer);
 }
