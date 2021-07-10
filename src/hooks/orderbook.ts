@@ -3,12 +3,10 @@ import useWebSocket, { ReadyState } from "react-use-websocket";
 import { IState } from "../typings/interfaces";
 import curry from "lodash.curry";
 import { TicketSize } from "../typings/enums";
-import {
-  reducer,
-  reset,
-  sendMessageToFeed,
-  setGrouping,
-} from "../components/orderbookFns";
+import { reducer } from "./orderbookReducer";
+import { sendMessageToFeed } from "../components/sendMessageToFeed";
+import { setTicketSizeGrouping } from "../components/setTicketSizeGrouping";
+import { resetOrderbook } from "../components/resetOrderbook";
 
 const useOrderBook = (url: string, product_ids: string[]) => {
   const initialState = <IState>{
@@ -38,8 +36,8 @@ const useOrderBook = (url: string, product_ids: string[]) => {
     sendJsonMessage,
     "book_ui_1"
   );
-  const setGroupingEvent = curry(setGrouping)(dispatch);
-  const clearOrderBook = curry(reset)(dispatch);
+  const setGroupingEvent = curry(setTicketSizeGrouping)(dispatch);
+  const clearOrderBook = curry(resetOrderbook)(dispatch);
 
   const crashFeed = () => setSocketUrl("wss://error");
   const restartFeed = () => setSocketUrl(url);

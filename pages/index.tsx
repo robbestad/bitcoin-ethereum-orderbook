@@ -8,7 +8,7 @@ import Titlebar from "../src/views/titlebar";
 import { useEffect, useMemo, useRef, useState } from "react";
 import toggleFeed from "../src/components/toggleFeed";
 import calculateSpread from "../src/components/calculateSpread";
-import changeGrouping from "../src/components/changeGrouping";
+import changeTicketSizeGrouping from "../src/components/changeTicketSizeGrouping";
 import Controls from "../src/views/controls";
 
 export default function Orderbook() {
@@ -37,7 +37,7 @@ export default function Orderbook() {
     setGroupingEvent,
     clearOrderBook
   );
-  const curriedHandleGroupingChange = curry(changeGrouping)(
+  const curriedHandleGroupingChange = curry(changeTicketSizeGrouping)(
     setGroupingEvent,
     clearOrderBook
   );
