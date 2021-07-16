@@ -6,117 +6,7 @@
   width: 100%;
   max-width: calc(6 * 7em + 15em);
 }
-.bidContainer {
-  padding: 0 0.5rem;
-  background: var(--color-background);
-  color: white;
-  display: flex;
-  position: relative;
-  transition: opacity 0.25s ease-in;
-}
 
-.bids {
-  grid-area: Bids;
-  font-family: Consolas, Courier New, monospace;
-  font-size: 1em;
-}
-.asks {
-  grid-area: Asks;
-  font-family: Consolas, Courier New, monospace;
-  font-size: 1em;
-  display: none;
-}
-.asksMobile {
-  display: none;
-}
-.asksDesktop {
-  display: block;
-}
-@media (max-width: 900px) {
-  .asksMobile {
-    display: block;
-  }
-  .asksDesktop {
-    display: none;
-  }
-}
-.controls {
-  grid-area: Controls;
-  color: white;
-  display: flex;
-  justify-content: center;
-}
-
-.btnToggleFeed {
-  margin: 0 0.5em;
-  background-color: #6049d7;
-  color: var(--color-light);
-  border-radius: 0.25em;
-  border: 1px solid #6049d7;
-  padding: 0.75em;
-  width: 8em;
-}
-.btnToggleFeed:hover {
-  background-color: #6049a7;
-  border: 1px solid #6049a7;
-}
-.btnToggleFeed:active {
-  background-color: #6049f7;
-  border: 1px solid #6049f7;
-}
-.btnKillFeed {
-  margin: 0 0.5em;
-  background-color: #a01a1c;
-  color: var(--color-light);
-  border-radius: 0.25em;
-  border: 1px solid #a01a1c;
-  padding: 0.75em;
-  width: 8em;
-}
-.btnKillFeed:hover {
-  background-color: #701a1c;
-  border: 1px solid #701a1c;
-}
-.btnKillFeed:active {
-  background-color: #e01a1c;
-  border: 1px solid #e01a1c;
-}
-
-.reverse {
-  flex-direction: row-reverse;
-}
-
-.total,
-.price,
-.size {
-  text-align: right;
-  min-width: 7em;
-  margin: 0 1em;
-}
-
-.price__green {
-  color: var(--color-green);
-}
-.price__red {
-  color: var(--color-red-dark);
-}
-
-.chart,
-.chartReversed {
-  background: rgba(153, 46, 46, 0.39);
-  top: 0;
-  bottom: 0;
-  position: absolute;
-  z-index: 1;
-  height: 100%;
-}
-.chart {
-  right: 0;
-  background: rgba(0, 146, 46, 0.39);
-}
-.chartReversed {
-  left: 0;
-}
 .spread {
   grid-area: Spread;
   padding: 0;
@@ -126,28 +16,15 @@
   text-align: center;
   display: none;
 }
+
 @media (max-width: 900px) {
   .container {
     grid-template-areas: "Head Head Head Head" "Asks Asks Asks Asks" "Spread Spread Spread Spread" "Bids Bids Bids Bids" "Controls Controls Controls Controls";
     width: 22em;
     margin: 1em auto;
   }
-  .bidContainer {
-    flex-direction: row-reverse;
-  }
   .spread {
     display: block;
-  }
-  .total,
-  .price,
-  .size {
-    text-align: right;
-    min-width: 6em;
-    margin: 0 0.5em;
-  }
-  .chart,
-  .chartReversed {
-    left: 0;
   }
 }
 @media (min-width: 54em) {

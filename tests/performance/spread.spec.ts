@@ -23,6 +23,6 @@ describe("Performance test calculateSpread", () => {
     const bids: OrderWithTotal[] = [{ size: 0.1, price: 1, total: 0 }];
     const asks: OrderWithTotal[] = [{ size: 1, price: 2, total: 0 }];
     const spreadPerf = perf("spread", calculateSpread, bids, asks);
-    expect(spreadPerf.time).to.be.lessThanOrEqual(100_000); //100 milliseconds
+    expect(spreadPerf.time).to.be.lessThanOrEqual(150_000); //150 milliseconds
   });
 });

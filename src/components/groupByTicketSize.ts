@@ -3,44 +3,16 @@ import { TicketSize } from "../typings/enums";
 
 export default function groupByTicketsize(
   bids: RawOrder[],
-  ticketSize: TicketSize
+  grouping: TicketSize
 ) {
-  let currentBid = bids[0];
-  let newBids: RawOrder[] = [];
-  let bidGroup: RawOrder[][] = [];
-  let bidGroupCount = 0;
-  let tempBids: RawOrder[] = [];
-  bids.forEach((bid, index) => {
-    const [currentPrice, currentSize] = currentBid;
-    const [nextPrice, nextSize] = bid;
-    let delta = nextPrice - currentPrice;
-    if (delta <= ticketSize) {
-      tempBids.push(bid);
-    } else {
-      bidGroup[bidGroupCount] = tempBids;
-      tempBids = [bid];
-      currentBid = bid;
-      bidGroupCount++;
+  return bids.reduce<RawOrder[]>((acc, order) => {
+    const [price, size] = order;
+    const [prevPrice, prevSize] = acc[acc.length - 1] || [];
+    const roundedPrice = Math.ceil(Number(price) / grouping) * grouping;
+    if (roundedPrice !== prevPrice) {
+      return [...acc, [roundedPrice, size]];
     }
-
-    //if last bid:
-    if (index + 1 === bids.length) {
-      bidGroup[bidGroupCount] = tempBids;
-    }
-  });
-  bidGroup.forEach((bids) => {
-    let priceSum = 0;
-    let sizeSum = 0;
-    for (let b in bids) {
-      sizeSum += bids[b][1];
-      priceSum += bids[b][0];
-    }
-    let price = Math.floor(priceSum / bids.length / ticketSize) * ticketSize;
-
-    price = bids[bids.length - 1][0];
-
-    newBids.push([price, sizeSum]);
-  });
-
-  return newBids;
+    const nextSize = prevSize + size;
+    return [...acc.slice(0, acc.length - 1), [roundedPrice, nextSize]];
+  }, []);
 }

@@ -1,5 +1,5 @@
-import styles from "../../styles/Orderbook.module.css";
 import { Feed } from "../typings/enums";
+import styles from "../../styles/Controls.module.css";
 
 type Props = {
   feed: Feed;

@@ -7,27 +7,36 @@
   border-bottom: 1px solid var(--color-divider);
   padding: 0 0 0.25em 0;
 }
+.titleSliders {
+  grid-area: Sliders;
+}
 .title {
   color: var(--color-light);
   font-size: 0.8em;
   font-weight: bold;
   padding: 0;
   margin: 0.75em 0 0 0.5em;
+  cursor: pointer;
 }
 .spread {
   padding: 0;
   margin: 0.5em 0 0 0.5em;
   color: var(--color-gray);
   font-size: 0.8em;
+  width: 12em;
+  text-align: center;
 }
 @media (max-width: 900px) {
   .spread {
     display: none;
   }
+  .title {
+    margin: 0.25em 0 0 0.5em;
+  }
 }
 .grouping {
   padding: 0;
-  margin: 0.2em 0 0 0.5em;
+  margin: 0;
   color: var(--color-light);
   font-size: 0.8em;
 }
@@ -48,8 +57,23 @@
 .select option {
   background: var(--color-dark);
 }
+@media (min-width: 900px) {
+  .grouping {
+    margin: 0.25em;
+  }
+  .spread,
+  .title {
+    margin: 0.75em;
+  }
+}
 @media (max-width: 1200px) {
   .select {
     margin: 0 0.5em 0 0;
+  }
+}
+@media (max-width: 900px) {
+  .titlebarContainer {
+    height: 2.5em;
+    margin: 0;
   }
 }

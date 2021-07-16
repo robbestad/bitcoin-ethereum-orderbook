@@ -1,6 +1,6 @@
 import { OrderWithTotal } from "../typings/interfaces";
 import cn from "classnames";
-import styles from "../../styles/Orderbook.module.css";
+import styles from "../../styles/Orders.module.css";
 import { Variant } from "../typings/enums";
 
 type EntryProps = {
@@ -21,17 +21,25 @@ export default function Entry({
   if (variant === Variant.mobile) {
     percentage = (bid.total / highestTotal) * 100;
   }
+  if (percentage > 100) percentage = 100;
+
   return (
     <span className={cn(styles.bidContainer, { [styles.reverse]: reverse })}>
-      <div className={styles.total}>{bid.total.toLocaleString("en-US")}</div>
-      <div className={styles.size}>{bid.size.toLocaleString("en-US")}</div>
+      <div className={styles.total}>
+        {bid.total > 0 ? bid.total.toLocaleString("en-US") : "-"}
+      </div>
+      <div className={styles.size}>
+        {bid.size > 0 ? bid.size.toLocaleString("en-US") : "-"}
+      </div>
       <div
         className={cn(styles.price, {
           [styles.price__green]: !reverse,
           [styles.price__red]: reverse,
         })}
       >
-        {bid.price.toLocaleString("en-US", { minimumFractionDigits: 2 })}
+        {bid.price > 0
+          ? bid.price.toLocaleString("en-US", { minimumFractionDigits: 2 })
+          : "-"}
       </div>
       <div
         className={cn({

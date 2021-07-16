@@ -48,15 +48,15 @@ describe("Update orderbook", () => {
   });
   it("updates bids in the right order with grouping BTCMedium", () => {
     const newBids = updateOrderbook([], bids, false, TicketSize.BTCMedium);
-    expect(newBids.length).to.equal(6);
-    expect(newBids[0].price).to.equal(33768.5);
-    expect(newBids[0].size).to.equal(6);
-    expect(newBids[0].total).to.equal(6);
+    expect(newBids.length).to.equal(9);
+    expect(newBids[0].price).to.equal(33769);
+    expect(newBids[0].size).to.equal(1);
+    expect(newBids[0].total).to.equal(1);
   });
   it("updates bids in the right order with grouping BTCLarge", () => {
     const newBids = updateOrderbook([], bids, false, TicketSize.BTCLarge);
-    expect(newBids.length).to.equal(5);
-    expect(newBids[0].price).to.equal(33768.5);
+    expect(newBids.length).to.equal(6);
+    expect(newBids[0].price).to.equal(33770);
     expect(newBids[0].size).to.equal(6);
     expect(newBids[0].total).to.equal(6);
   });

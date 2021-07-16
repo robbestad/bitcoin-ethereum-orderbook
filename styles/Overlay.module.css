@@ -1,0 +1,41 @@
+.errorView,
+.connectionView {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  inset: 25%;
+  height: 2em;
+  padding: 0.5em 0 0 0;
+  background-color: rgb(85, 30, 30);
+  color: var(--color-light);
+  font-size: 2em;
+  cursor: pointer;
+  z-index: 1;
+  top: 2em;
+  border: 1px solid var(--color-red);
+  border-radius: 0.25em;
+  text-align: center;
+  margin: 0 auto;
+  left: 25%;
+  width: 50%;
+}
+.connectionView {
+  background-color: rgb(5, 80, 30);
+  border: 1px solid rgb(5, 80, 30);
+}
+.errorView {
+  z-index: 2;
+}
+@media (max-width: 1200px) {
+  .errorView,
+  .connectionView {
+    left: 0.5em;
+    width: calc(100% - 1em);
+  }
+  .errorView {
+    height: 3.5em;
+  }
+  .connectionView {
+    height: 2.5em;
+  }
+}

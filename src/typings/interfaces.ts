@@ -12,6 +12,7 @@ export interface IState {
   asksReversed: OrderWithTotal[];
   bids: OrderWithTotal[];
   currentGrouping: TicketSize;
+  depth: number;
 }
 
 export interface IPayload {

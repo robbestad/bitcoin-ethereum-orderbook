@@ -1,6 +1,6 @@
 import curry from "lodash.curry";
 import styles from "../styles/Orderbook.module.css";
-import errorstyles from "../styles/Error.module.css";
+import overlaystyles from "../styles/Overlay.module.css";
 import { Feed, Variant } from "../src/typings/enums";
 import useOrderBook from "../src/hooks/orderbook";
 import Orders from "../src/views/orders";
@@ -10,6 +10,7 @@ import toggleFeed from "../src/components/toggleFeed";
 import calculateSpread from "../src/components/calculateSpread";
 import changeTicketSizeGrouping from "../src/components/changeTicketSizeGrouping";
 import Controls from "../src/views/controls";
+import Slider from "../src/views/slider";
 
 export default function Orderbook() {
   const [feed, setFeed] = useState(Feed.Bitcoin_USD);
@@ -24,6 +25,10 @@ export default function Orderbook() {
     crashFeed,
     restartFeed,
     displayError,
+    displayConnectionStatus,
+    connectionStatus,
+    setSlider,
+    depth,
   } = useOrderBook("wss://www.cryptofacilities.com/ws/v1", [feed]);
 
   const curriedToggleFeed = curry(toggleFeed)(
@@ -46,47 +51,76 @@ export default function Orderbook() {
       restartFeed();
     }
   }
+  const totalReversed = useMemo(() => {
+    return asksReversed.filter((e) => e.total).reduce((x, y) => x + y.total, 0);
+  }, [asksReversed]);
+  const totalBids = bids[bids.length - 1]?.total;
+  const totalAsks = asks[asks.length - 1]?.total;
 
   const spread = useMemo(() => {
     return calculateSpread(bids, asks);
   }, [bids, asks]);
 
   return (
-    <div className={styles.container}>
-      <Titlebar
-        feed={feed}
-        currentGrouping={currentGrouping}
-        handleChangeGrouping={curriedHandleGroupingChange}
-        spread={spread}
-      />
-
-      <Orders entries={bids} greenColorScheme={false} depth={10} />
-
-      {/* only visible on mobile */}
-      <div className={styles.spread}>Spread {spread}</div>
-
-      {/* only visible on desktop */}
-      <Orders entries={asks} greenColorScheme={true} depth={10} />
-
-      {/* only visible on mobile */}
-      <Orders
-        entries={asksReversed}
-        greenColorScheme={true}
-        depth={10}
-        variant={Variant.mobile}
-      />
-
-      <Controls
-        feed={feed}
-        handleToggleCrash={handleToggleCrash}
-        handleToggleFeed={curriedToggleFeed}
-        displayError={displayError}
-      />
+    <>
       {displayError && (
-        <div className={errorstyles.errorView}>
+        <div className={overlaystyles.errorView}>
           An unexpected error has occurred!
+          <br />
         </div>
       )}
-    </div>
+      {displayConnectionStatus && (
+        <div className={overlaystyles.connectionView}>{connectionStatus}</div>
+      )}
+
+      <div className={styles.container}>
+        <Titlebar
+          feed={feed}
+          currentGrouping={currentGrouping}
+          handleChangeGrouping={curriedHandleGroupingChange}
+          spread={spread}
+        >
+          <Slider
+            size={depth}
+            minVal={3}
+            maxVal={25}
+            updateFn={(val) => setSlider("depth", val)}
+          />
+        </Titlebar>
+        <Orders
+          entries={bids}
+          total={totalBids}
+          greenColorScheme={false}
+          depth={depth}
+        />
+
+        {/* only visible on mobile */}
+        <div className={styles.spread}>Spread {spread}</div>
+
+        {/* only visible on desktop */}
+        <Orders
+          entries={asks}
+          total={totalReversed}
+          greenColorScheme={true}
+          depth={depth}
+        />
+
+        {/* only visible on mobile */}
+        <Orders
+          entries={asksReversed}
+          total={totalAsks}
+          greenColorScheme={true}
+          depth={depth}
+          variant={Variant.mobile}
+        />
+
+        <Controls
+          feed={feed}
+          handleToggleCrash={handleToggleCrash}
+          handleToggleFeed={curriedToggleFeed}
+          displayError={displayError}
+        />
+      </div>
+    </>
   );
 }

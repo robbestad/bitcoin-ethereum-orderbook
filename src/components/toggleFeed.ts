@@ -4,6 +4,7 @@ export default function toggleFeed(
   sendMessageEvent: (productIds: Feed[], eventName: string) => void,
   setFeed: (feed: Feed) => void,
   setGroupingEvent: (ticketSize: TicketSize) => void,
+  //clearBatch: () => void,
   clearOrderBook: (type: string) => void,
   feed: Feed
 ) {
@@ -17,10 +18,12 @@ export default function toggleFeed(
     setGroupingEvent(TicketSize.EthDefault);
     newFeed = Feed.Bitcoin_USD;
   }
+
   const timer = setTimeout(() => {
     clearOrderBook("reset");
+    //clearBatch();
     setFeed(newFeed);
     sendMessageEvent([newFeed], "subscribe");
-  }, 250);
+  }, 300);
   return () => clearTimeout(timer);
 }

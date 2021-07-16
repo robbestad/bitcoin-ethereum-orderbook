@@ -1,0 +1,57 @@
+.sliderContainer {
+  width: 100%;
+  height: 2em;
+  padding: 0;
+  margin-top: 0.25em;
+}
+@media (max-width: 900px) {
+  .sliderContainer {
+    width: 9em;
+    margin: 0;
+  }
+}
+@media (max-width: 320px) {
+  .sliderContainer {
+    width: 6em;
+  }
+}
+
+.slider[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: 1px solid #000000;
+  height: 2em;
+  width: 2em;
+  border-radius: 1em;
+  background: var(--slider-knob-color);
+  cursor: pointer;
+  margin-top: -0.6em; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+  box-shadow: 1px 1px 1px #000000, 0 0 2px var(--color-green);
+}
+.slider[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 1.45em;
+  cursor: pointer;
+  box-shadow: 0 0 0 #000000, 0 0 2px var(--slider-knob-color);
+  border-radius: 1em;
+  background: var(--slider-bg-color);
+  padding: 0.35em 0;
+}
+
+.slider[type="range"]::-moz-range-thumb {
+  width: 2em;
+  height: 0.25em;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 1px 1px 2px var(--slider-knob-color);
+  border-radius: 1em;
+  background-color: var(--slider-knob-color);
+  padding: 0.9em 0 0.75em 0;
+}
+.slider[type="range"]::-moz-range-track {
+  width: 100%;
+  height: 0.35em;
+  cursor: pointer;
+  box-shadow: 0 0 0 #000000, 0 0 2px var(--slider-knob-color);
+  border-radius: 1em;
+  background: var(--slider-bg-color);
+  padding: 0.2em 0 0.45em 0;
+}

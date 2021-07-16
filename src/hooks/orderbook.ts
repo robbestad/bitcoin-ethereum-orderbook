@@ -1,12 +1,13 @@
-import { useCallback, useEffect, useReducer, useState } from "react";
-import useWebSocket, { ReadyState } from "react-use-websocket";
-import { IState } from "../typings/interfaces";
 import curry from "lodash.curry";
-import { TicketSize } from "../typings/enums";
-import { reducer } from "./orderbookReducer";
-import { sendMessageToFeed } from "../components/sendMessageToFeed";
-import { setTicketSizeGrouping } from "../components/setTicketSizeGrouping";
+import { useEffect, useReducer, useState } from "react";
+import useWebSocket, { ReadyState } from "react-use-websocket";
 import { resetOrderbook } from "../components/resetOrderbook";
+import { sendMessageToFeed } from "../components/sendMessageToFeed";
+import { setSliderValue } from "../components/setSliderValue";
+import { setTicketSizeGrouping } from "../components/setTicketSizeGrouping";
+import { TicketSize } from "../typings/enums";
+import { IState } from "../typings/interfaces";
+import { reducer } from "./orderbookReducer";
 
 const useOrderBook = (url: string, product_ids: string[]) => {
   const initialState = <IState>{
@@ -14,21 +15,38 @@ const useOrderBook = (url: string, product_ids: string[]) => {
     bids: [],
     asksReversed: [],
     currentGrouping: TicketSize.BTCDefault,
+    depth: 8,
   };
   const [state, dispatch] = useReducer(reducer, initialState);
   const [socketUrl, setSocketUrl] = useState(url);
   const [displayError, setDisplayError] = useState(false);
-  const [hasConnectedOnce, setHasConnectedOnce] = useState(false);
+  const [displayConnectionStatus, setDisplayConnectionStatus] = useState(false);
+  const [manuallyStopped, setManuallyStopped] = useState(false);
 
   const { sendJsonMessage, lastJsonMessage, readyState } = useWebSocket(
     socketUrl,
-    {}
+    {
+      onOpen: () => {
+        if (displayError) setDisplayError(false);
+      },
+      onClose: () => {
+        if (!manuallyStopped) {
+          clearOrderBook("reset");
+        }
+      },
+      shouldReconnect: () => {
+        return !manuallyStopped;
+      },
+      reconnectInterval: 3000,
+      retryOnError: true,
+      reconnectAttempts: 10,
+    }
   );
   const connectionStatus = {
     [ReadyState.CONNECTING]: "Connecting",
     [ReadyState.OPEN]: "Open",
-    [ReadyState.CLOSING]: "Closing",
-    [ReadyState.CLOSED]: "Closed",
+    [ReadyState.CLOSING]: "Connection closing",
+    [ReadyState.CLOSED]: "Connection closed",
     [ReadyState.UNINSTANTIATED]: "Uninstantiated",
   }[readyState];
 
@@ -38,24 +56,36 @@ const useOrderBook = (url: string, product_ids: string[]) => {
   );
   const setGroupingEvent = curry(setTicketSizeGrouping)(dispatch);
   const clearOrderBook = curry(resetOrderbook)(dispatch);
+  const setSlider = curry(setSliderValue)(dispatch);
 
-  const crashFeed = () => setSocketUrl("wss://error");
-  const restartFeed = () => setSocketUrl(url);
+  const crashFeed = () => {
+    setSocketUrl("wss://error");
+    setManuallyStopped(true);
+  };
+  const restartFeed = () => {
+    setSocketUrl(url);
+    setManuallyStopped(false);
+  };
 
   useEffect(() => {
+    if (manuallyStopped) !displayError && setDisplayError(true);
+
     if (readyState === ReadyState.OPEN) {
-      if (displayError) setDisplayError(false);
-      if (!hasConnectedOnce) setHasConnectedOnce(true);
+      displayConnectionStatus && setDisplayConnectionStatus(false);
       return;
-    } else {
-      if (hasConnectedOnce) setDisplayError(true);
     }
+    !displayConnectionStatus && setDisplayConnectionStatus(true);
+    !displayConnectionStatus && !manuallyStopped && clearOrderBook("reset");
+
     sendMessageEvent(product_ids, "subscribe");
-  }, [connectionStatus, hasConnectedOnce, readyState, sendMessageEvent]);
+  }, [connectionStatus, readyState, sendMessageEvent]);
 
   useEffect(() => {
     if (!lastJsonMessage) return;
-    dispatch({ type: "newData", payload: lastJsonMessage });
+    dispatch({
+      type: "newData",
+      payload: lastJsonMessage,
+    });
   }, [lastJsonMessage]);
 
   return {
@@ -66,6 +96,9 @@ const useOrderBook = (url: string, product_ids: string[]) => {
     restartFeed,
     displayError,
     clearOrderBook,
+    connectionStatus,
+    displayConnectionStatus,
+    setSlider,
   };
 };
 export default useOrderBook;

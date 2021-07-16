@@ -1,0 +1,89 @@
+.bidContainer {
+  padding: 0 0.5rem;
+  background: var(--color-background);
+  color: white;
+  display: flex;
+  position: relative;
+  transition: opacity 0.25s ease-in;
+}
+
+.bids,
+.asks {
+  min-height: 2em;
+  font-size: 1em;
+  font-family: Consolas, Courier New, monospace;
+}
+.bids {
+  grid-area: Bids;
+}
+.asks {
+  grid-area: Asks;
+  display: none;
+}
+.asksMobile {
+  display: none;
+}
+.asksDesktop {
+  display: block;
+}
+@media (max-width: 900px) {
+  .asksMobile {
+    display: block;
+  }
+  .asksDesktop {
+    display: none;
+  }
+}
+
+.reverse {
+  flex-direction: row-reverse;
+}
+
+.total,
+.price,
+.size {
+  text-align: right;
+  min-width: 7em;
+  margin: 0 1em;
+}
+
+.price__green {
+  color: var(--color-green);
+}
+.price__red {
+  color: var(--color-red-dark);
+}
+
+.chart,
+.chartReversed {
+  background: rgba(153, 46, 46, 0.39);
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  z-index: 1;
+  height: 100%;
+}
+.chart {
+  right: 0;
+  background: rgba(0, 146, 46, 0.39);
+}
+.chartReversed {
+  left: 0;
+}
+
+@media (max-width: 900px) {
+  .bidContainer {
+    flex-direction: row-reverse;
+  }
+  .total,
+  .price,
+  .size {
+    text-align: right;
+    min-width: 6em;
+    margin: 0 0.5em;
+  }
+  .chart,
+  .chartReversed {
+    left: 0;
+  }
+}

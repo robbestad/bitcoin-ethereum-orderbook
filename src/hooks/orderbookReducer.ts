@@ -1,4 +1,4 @@
-import { IPayload, IState } from "../typings/interfaces";
+import { IPayload, IState, OrderWithTotal } from "../typings/interfaces";
 import { TicketSize } from "../typings/enums";
 import { updateOrderbook } from "../components/updateOrderbook";
 import orderBy from "lodash.orderby";
@@ -9,23 +9,17 @@ export function reducer(
 ): IState {
   switch (action.type) {
     case "newData": {
-      const { asks, bids } = action.payload as IPayload;
-      const newAsks = updateOrderbook(
-        state.asks,
-        asks,
-        true,
-        state.currentGrouping
-      );
-      let asksReversed = orderBy(newAsks, "price", "desc").slice(
-        newAsks.length - 10,
+      let newAsks: OrderWithTotal[] = state.asks;
+      let asksReversed: OrderWithTotal[] = [];
+      let newBids: OrderWithTotal[] = state.bids;
+      const { asks, bids } = <IPayload>action.payload;
+      newAsks = updateOrderbook(newAsks, asks, true, state.currentGrouping);
+      newBids = updateOrderbook(newBids, bids, false, state.currentGrouping);
+      asksReversed = orderBy(newAsks, "price", "desc").slice(
+        newAsks.length - state.depth,
         newAsks.length
       );
-      let newBids = updateOrderbook(
-        state.bids,
-        bids,
-        false,
-        state.currentGrouping
-      );
+
       return {
         ...state,
         asksReversed: asksReversed,
@@ -39,16 +33,21 @@ export function reducer(
         currentGrouping: action.payload as TicketSize,
       };
     }
+    case "depth": {
+      return {
+        ...state,
+        depth: action.payload as number,
+      };
+    }
     case "reset": {
       return {
-        currentGrouping: state.currentGrouping,
+        ...state,
         asks: [],
         bids: [],
         asksReversed: [],
       };
     }
     default: {
-      debugger;
       throw new Error();
     }
   }
