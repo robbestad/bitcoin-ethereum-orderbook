@@ -1,6 +1,6 @@
 import { TicketSize } from "../../src/typings/enums";
 import { expect } from "chai";
-import groupByTicketsize from "../../src/components/groupByTicketSize";
+import groupByTicketsize from "../../src/functions/groupByTicketSize";
 import { RawOrder } from "../../src/typings/types";
 
 describe("Group stream by ticketsize", () => {

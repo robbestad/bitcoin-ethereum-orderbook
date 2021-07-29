@@ -1,6 +1,6 @@
 import { IPayload, IState, OrderWithTotal } from "../typings/interfaces";
 import { TicketSize } from "../typings/enums";
-import { updateOrderbook } from "../components/updateOrderbook";
+import { updateOrderbook } from "../functions/updateOrderbook";
 import orderBy from "lodash.orderby";
 
 export function reducer(

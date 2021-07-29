@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { updateOrderbook } from "../../src/components/updateOrderbook";
+import { updateOrderbook } from "../../src/functions/updateOrderbook";
 import { TicketSize } from "../../src/typings/enums";
 import { RawOrder } from "../../src/typings/types";
 

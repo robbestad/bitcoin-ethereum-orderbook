@@ -1,10 +1,10 @@
 import curry from "lodash.curry";
 import { useEffect, useReducer, useState } from "react";
 import useWebSocket, { ReadyState } from "react-use-websocket";
-import { resetOrderbook } from "../components/resetOrderbook";
-import { sendMessageToFeed } from "../components/sendMessageToFeed";
-import { setSliderValue } from "../components/setSliderValue";
-import { setTicketSizeGrouping } from "../components/setTicketSizeGrouping";
+import { resetOrderbook } from "../functions/resetOrderbook";
+import { sendMessageToFeed } from "../functions/sendMessageToFeed";
+import { setSliderValue } from "../functions/setSliderValue";
+import { setTicketSizeGrouping } from "../functions/setTicketSizeGrouping";
 import { TicketSize } from "../typings/enums";
 import { IState } from "../typings/interfaces";
 import { reducer } from "./orderbookReducer";

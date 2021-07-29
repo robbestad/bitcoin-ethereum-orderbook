@@ -5,10 +5,10 @@ import { Feed, Variant } from "../src/typings/enums";
 import useOrderBook from "../src/hooks/orderbook";
 import Orders from "../src/views/orders";
 import Titlebar from "../src/views/titlebar";
-import { useMemo, useState } from "react";
-import toggleFeed from "../src/components/toggleFeed";
-import calculateSpread from "../src/components/calculateSpread";
-import changeTicketSizeGrouping from "../src/components/changeTicketSizeGrouping";
+import { useMemo, useState, StrictMode } from "react";
+import toggleFeed from "../src/functions/toggleFeed";
+import calculateSpread from "../src/functions/calculateSpread";
+import changeTicketSizeGrouping from "../src/functions/changeTicketSizeGrouping";
 import Controls from "../src/views/controls";
 import Slider from "../src/views/slider";
 
@@ -62,7 +62,7 @@ export default function Orderbook() {
   }, [bids, asks]);
 
   return (
-    <>
+    <StrictMode>
       {displayError && (
         <div className={overlaystyles.errorView}>
           An unexpected error has occurred!
@@ -121,6 +121,6 @@ export default function Orderbook() {
           displayError={displayError}
         />
       </div>
-    </>
+    </StrictMode>
   );
 }

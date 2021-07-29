@@ -1,6 +1,6 @@
 import microtime from "microtime";
 import { expect } from "chai";
-import calculateSpread from "../../src/components/calculateSpread";
+import calculateSpread from "../../src/functions/calculateSpread";
 import { OrderWithTotal } from "../../src/typings/interfaces";
 
 const perf = function (

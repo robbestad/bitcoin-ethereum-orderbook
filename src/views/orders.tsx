@@ -23,7 +23,6 @@ function Bids({
   entries,
   greenColorScheme,
   depth,
-  total,
   variant = Variant.desktop,
 }: Props) {
   if (!entries) return null;
@@ -46,12 +45,13 @@ function Bids({
         <div className={styles.size}>Size</div>
         <div className={styles.price}>Price</div>
       </div>
+
       {orders.map(
         (bid, index) =>
           index < depth && (
             <Entry
               key={`${index}${bid.price}`}
-              highestTotal={total}
+              highestTotal={orders[depth - 1].total}
               reverse={greenColorScheme}
               bid={bid}
               variant={variant}

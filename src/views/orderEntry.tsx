@@ -18,10 +18,6 @@ export default function Entry({
 }: EntryProps) {
   if (!bid) return null;
   let percentage = (bid.total / highestTotal) * 100;
-  if (variant === Variant.mobile) {
-    percentage = (bid.total / highestTotal) * 100;
-  }
-  if (percentage > 100) percentage = 0; //todo calculate this in the reducer
 
   return (
     <span className={cn(styles.bidContainer, { [styles.reverse]: reverse })}>
