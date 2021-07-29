@@ -5,7 +5,7 @@ import { resetOrderbook } from "../functions/resetOrderbook";
 import { sendMessageToFeed } from "../functions/sendMessageToFeed";
 import { setSliderValue } from "../functions/setSliderValue";
 import { setTicketSizeGrouping } from "../functions/setTicketSizeGrouping";
-import { ReducerName, TicketSize } from "../typings/enums";
+import { ReducerTypes, TicketSize } from "../typings/enums";
 import { IState } from "../typings/interfaces";
 import { reducer } from "./orderbookReducer";
 

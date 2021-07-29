@@ -1,5 +1,5 @@
 import { IPayload, IState, OrderWithTotal } from "../typings/interfaces";
-import { TicketSize } from "../typings/enums";
+import { ReducerTypes, TicketSize } from "../typings/enums";
 import { updateOrderbook } from "../functions/updateOrderbook";
 import orderBy from "lodash.orderby";
 
@@ -8,7 +8,7 @@ export function reducer(
   action: { type: string; payload?: IPayload | TicketSize }
 ): IState {
   switch (action.type) {
-    case "newData": {
+    case ReducerTypes.newData: {
       let newAsks: OrderWithTotal[] = state.asks;
       let asksReversed: OrderWithTotal[] = [];
       let newBids: OrderWithTotal[] = state.bids;
@@ -27,19 +27,19 @@ export function reducer(
         bids: newBids,
       };
     }
-    case "setTicketSizeGrouping": {
+    case ReducerTypes.setTicketSizeGrouping: {
       return {
         ...state,
         currentGrouping: action.payload as TicketSize,
       };
     }
-    case "depth": {
+    case ReducerTypes.depth: {
       return {
         ...state,
         depth: action.payload as number,
       };
     }
-    case "reset": {
+    case ReducerTypes.reset: {
       return {
         ...state,
         asks: [],

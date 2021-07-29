@@ -17,6 +17,9 @@ export enum Variant {
   mobile,
 }
 
-export enum ReducerName {
+export enum ReducerTypes {
+  newData = "newData",
+  setTicketSizeGrouping = "setTicketSizeGrouping",
   reset = "reset",
+  depth = "depth",
 }

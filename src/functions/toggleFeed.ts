@@ -1,4 +1,4 @@
-import { Feed, ReducerName, TicketSize } from "../typings/enums";
+import { Feed, ReducerTypes, TicketSize } from "../typings/enums";
 
 export default function toggleFeed(
   sendMessageEvent: (productIds: Feed[], eventName: string) => void,
