@@ -4,8 +4,7 @@ export default function toggleFeed(
   sendMessageEvent: (productIds: Feed[], eventName: string) => void,
   setFeed: (feed: Feed) => void,
   setGroupingEvent: (ticketSize: TicketSize) => void,
-  //clearBatch: () => void,
-  clearOrderBook: (type: string) => void,
+  clearOrderBook: () => void,
   feed: Feed
 ) {
   let newFeed: Feed;
@@ -20,8 +19,7 @@ export default function toggleFeed(
   }
 
   const timer = setTimeout(() => {
-    clearOrderBook("reset");
-    //clearBatch();
+    clearOrderBook();
     setFeed(newFeed);
     sendMessageEvent([newFeed], "subscribe");
   }, 300);

@@ -2,10 +2,10 @@ import { TicketSize } from "../typings/enums";
 
 export default function changeTicketSizeGrouping(
   setGroupingEvent: (grouping: TicketSize) => void,
-  clearOrderBook: (eventName: string) => void,
+  clearOrderBook: () => void,
   ticketSize: TicketSize
 ) {
-  clearOrderBook("reset");
+  clearOrderBook();
   const timer = setTimeout(() => {
     setGroupingEvent(ticketSize);
   }, 250);

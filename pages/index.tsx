@@ -3,14 +3,14 @@ import styles from "../styles/Orderbook.module.css";
 import overlaystyles from "../styles/Overlay.module.css";
 import { Feed, Variant } from "../src/typings/enums";
 import useOrderBook from "../src/hooks/orderbook";
-import Orders from "../src/views/orders";
-import Titlebar from "../src/views/titlebar";
+import Orders from "../src/components/orders";
+import Titlebar from "../src/components/titlebar";
 import { useMemo, useState, StrictMode } from "react";
 import toggleFeed from "../src/functions/toggleFeed";
 import calculateSpread from "../src/functions/calculateSpread";
 import changeTicketSizeGrouping from "../src/functions/changeTicketSizeGrouping";
-import Controls from "../src/views/controls";
-import Slider from "../src/views/slider";
+import Controls from "../src/components/controls";
+import Slider from "../src/components/slider";
 
 export default function Orderbook() {
   const [feed, setFeed] = useState(Feed.Bitcoin_USD);
@@ -47,7 +47,7 @@ export default function Orderbook() {
     if (!displayError) {
       crashFeed();
     } else {
-      clearOrderBook("reset");
+      clearOrderBook();
       restartFeed();
     }
   }

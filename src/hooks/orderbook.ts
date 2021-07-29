@@ -31,7 +31,7 @@ const useOrderBook = (url: string, product_ids: string[]) => {
       },
       onClose: () => {
         if (!manuallyStopped) {
-          clearOrderBook("reset");
+          clearOrderBook();
         }
       },
       shouldReconnect: () => {
@@ -75,7 +75,7 @@ const useOrderBook = (url: string, product_ids: string[]) => {
       return;
     }
     !displayConnectionStatus && setDisplayConnectionStatus(true);
-    !displayConnectionStatus && !manuallyStopped && clearOrderBook("reset");
+    !displayConnectionStatus && !manuallyStopped && clearOrderBook();
 
     sendMessageEvent(product_ids, "subscribe");
   }, [connectionStatus, readyState, sendMessageEvent]);
