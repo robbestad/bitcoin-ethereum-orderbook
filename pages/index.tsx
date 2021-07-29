@@ -87,12 +87,7 @@ export default function Orderbook() {
             updateFn={(val) => setSlider("depth", val)}
           />
         </Titlebar>
-        <Orders
-          entries={bids}
-          total={totalBids}
-          greenColorScheme={false}
-          depth={depth}
-        />
+        <Orders entries={bids} total={totalBids} isAsk={false} depth={depth} />
 
         {/* only visible on mobile */}
         <div className={styles.spread}>Spread {spread}</div>
@@ -101,7 +96,7 @@ export default function Orderbook() {
         <Orders
           entries={asks}
           total={totalReversed}
-          greenColorScheme={true}
+          isAsk={true}
           depth={depth}
         />
 
@@ -109,7 +104,7 @@ export default function Orderbook() {
         <Orders
           entries={asksReversed}
           total={totalAsks}
-          greenColorScheme={true}
+          isAsk={true}
           depth={depth}
           variant={Variant.mobile}
         />
