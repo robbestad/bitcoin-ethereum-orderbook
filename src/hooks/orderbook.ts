@@ -83,7 +83,7 @@ const useOrderBook = (url: string, product_ids: string[]) => {
   useEffect(() => {
     if (!lastJsonMessage) return;
     dispatch({
-      type: "newData",
+      type: ReducerTypes.newData,
       payload: lastJsonMessage,
     });
   }, [lastJsonMessage]);
