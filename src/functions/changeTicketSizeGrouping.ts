@@ -1,4 +1,4 @@
-import { TicketSize } from "../typings/enums";
+import { ReducerName, TicketSize } from "../typings/enums";
 
 export default function changeTicketSizeGrouping(
   setGroupingEvent: (grouping: TicketSize) => void,

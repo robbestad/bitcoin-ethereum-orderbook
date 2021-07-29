@@ -5,7 +5,7 @@ import { resetOrderbook } from "../functions/resetOrderbook";
 import { sendMessageToFeed } from "../functions/sendMessageToFeed";
 import { setSliderValue } from "../functions/setSliderValue";
 import { setTicketSizeGrouping } from "../functions/setTicketSizeGrouping";
-import { TicketSize } from "../typings/enums";
+import { ReducerName, TicketSize } from "../typings/enums";
 import { IState } from "../typings/interfaces";
 import { reducer } from "./orderbookReducer";
 
@@ -55,7 +55,7 @@ const useOrderBook = (url: string, product_ids: string[]) => {
     "book_ui_1"
   );
   const setGroupingEvent = curry(setTicketSizeGrouping)(dispatch);
-  const clearOrderBook = curry(resetOrderbook)(dispatch);
+  const clearOrderBook = () => resetOrderbook(dispatch);
   const setSlider = curry(setSliderValue)(dispatch);
 
   const crashFeed = () => {

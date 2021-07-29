@@ -1,4 +1,4 @@
-import { Feed, TicketSize } from "../typings/enums";
+import { Feed, ReducerName, TicketSize } from "../typings/enums";
 
 export default function toggleFeed(
   sendMessageEvent: (productIds: Feed[], eventName: string) => void,
@@ -17,11 +17,10 @@ export default function toggleFeed(
     setGroupingEvent(TicketSize.EthDefault);
     newFeed = Feed.Bitcoin_USD;
   }
-
   const timer = setTimeout(() => {
     clearOrderBook();
     setFeed(newFeed);
     sendMessageEvent([newFeed], "subscribe");
-  }, 300);
+  }, 400);
   return () => clearTimeout(timer);
 }
