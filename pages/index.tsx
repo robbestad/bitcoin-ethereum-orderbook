@@ -51,15 +51,12 @@ export default function Orderbook() {
       restartFeed();
     }
   }
-  const totalReversed = useMemo(() => {
-    return asksReversed.filter((e) => e.total).reduce((x, y) => x + y.total, 0);
-  }, [asksReversed]);
+  const totalReversed = asksReversed
+    .filter((e) => e.total)
+    .reduce((x, y) => x + y.total, 0);
   const totalBids = bids[bids.length - 1]?.total;
   const totalAsks = asks[asks.length - 1]?.total;
-
-  const spread = useMemo(() => {
-    return calculateSpread(bids, asks);
-  }, [bids, asks]);
+  const spread = calculateSpread(bids, asks);
 
   return (
     <StrictMode>
