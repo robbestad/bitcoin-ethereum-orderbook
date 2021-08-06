@@ -38,10 +38,10 @@
   padding: 0;
   margin: 0;
   color: var(--color-light);
-  font-size: 0.8em;
+  font-size: 0.7em;
 }
 .select {
-  width: 7.5em;
+  width: 7.8em;
   border: 1px solid var(--color-gray);
   border-radius: 0.25em;
   padding: 0.4em 0.4em;
