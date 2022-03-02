@@ -13,6 +13,8 @@ export interface IState {
   bids: OrderWithTotal[];
   currentGrouping: TicketSize;
   depth: number;
+  newAsks?:OrderWithTotal[];
+  newBids?:OrderWithTotal[];
 }
 
 export interface IPayload {
