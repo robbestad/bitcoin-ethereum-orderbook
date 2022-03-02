@@ -23,6 +23,7 @@
   border: 1px solid #6049f7;
 }
 .btnKillFeed {
+  display: none;
   margin: 0 0.5em;
   background-color: #a01a1c;
   color: var(--color-light);
