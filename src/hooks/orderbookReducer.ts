@@ -41,7 +41,8 @@ export function reducer(
     }
     case ReducerTypes.reset: {
       return {
-        ...state,
+        newAsks: [],
+        newBids: [],
         asks: [],
         bids: [],
         asksReversed: [],
